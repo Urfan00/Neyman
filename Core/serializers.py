@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from services.mixins import SosialMedia
 from .models import FAQ, Collaborators, Contacts, FeedBack, OurTeam, Slider, Subscribers
 
 

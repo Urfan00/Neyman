@@ -19,6 +19,9 @@ class Uploader:
     def slider_image(instance, filename):
         return f"Slider_Image/{instance.slider_header}/{filename}"
 
+    @staticmethod
+    def blog_image(instance, filename):
+        return f"Blog_Image/{instance.title}/{filename}"
 
 
 
