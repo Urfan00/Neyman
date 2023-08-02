@@ -1,7 +1,7 @@
 import django_filters.rest_framework
 from rest_framework import filters
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from .serializers import BlogCREATESerializer, BlogCategoryCREATESerializer, BlogCategoryREADSerializer, BlogREADSerializer, TagSerializer
+from .serializers import BlogCREATESerializer, BlogCategorySerializer, BlogREADSerializer, TagSerializer
 from .models import Blog, BlogCategory, Tag
 
 
@@ -12,23 +12,17 @@ class GenericAPIViewSerializerMixin:
 
 
 # Blog Category GET & POST
-class BlogCategoryListCreateAPIView(GenericAPIViewSerializerMixin, ListCreateAPIView):
+class BlogCategoryListCreateAPIView(ListCreateAPIView):
     queryset = BlogCategory.objects.all()
     filter_backends = [filters.SearchFilter]
     search_fields = ['name']
-    serializer_classes = {
-        'GET' : BlogCategoryREADSerializer,
-        'POST' : BlogCategoryCREATESerializer
-    }
+    serializer_class = BlogCategorySerializer
 
 # Blog Category GET & PUT & PATCH & DELETE
-class BlogCategoryRetrieveUpdateDestroyAPIView(GenericAPIViewSerializerMixin, RetrieveUpdateDestroyAPIView):
+class BlogCategoryRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     queryset = BlogCategory.objects.all()
-    serializer_classes = {
-        'GET' : BlogCategoryREADSerializer,
-        'PUT' : BlogCategoryCREATESerializer,
-        'PATCH' : BlogCategoryCREATESerializer
-    }
+    serializer_class = BlogCategorySerializer
+
 
 # Tag GET & POST
 class TagListCreateAPIView(ListCreateAPIView):

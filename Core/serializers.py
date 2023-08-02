@@ -39,7 +39,7 @@ class FeedBackSerializers(serializers.ModelSerializer):
 
 
 # FAQ Serializer
-class FAQSerializer(serializers.Field):
+class FAQSerializer(serializers.ModelSerializer):
     class Meta:
         model = FAQ
         fields = ['id', 'question', 'answer', 'created_at', 'updated_at']
