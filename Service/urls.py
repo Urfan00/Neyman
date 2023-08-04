@@ -1,5 +1,39 @@
 from django.urls import path
+from .views import (LastWorksListCreateAPIView,
+                    LastWorksRetrieveUpdateDestroyAPIView,
+                    PackageListCreateAPIView,
+                    PackagePropertyListCreateAPIView,
+                    PackagePropertyRetrieveUpdateDestroyAPIView,
+                    PackageRetrieveUpdateDestroyAPIView,
+                    ServiceCategoryListCreateAPIView,
+                    ServiceCategoryRetrieveUpdateDestroyAPIView,
+                    ServicePropertyListCreateAPIView,
+                    ServicePropertyRetrieveUpdateDestroyAPIView,
+                    ServicesListCreateAPIView,
+                    ServicesPropertyDetailsListCreateAPIView,
+                    ServicesPropertyDetailsRetrieveUpdateDestroyAPIView,
+                    ServicesRetrieveUpdateDestroyAPIView)
+
 
 urlpatterns = [
-    
+    path('package_property/', PackagePropertyListCreateAPIView.as_view(), name='package_property'),
+    path('package_property/<int:pk>', PackagePropertyRetrieveUpdateDestroyAPIView.as_view(), name='package_property'),
+
+    path('package/', PackageListCreateAPIView.as_view(), name='package'),
+    path('package/<int:pk>', PackageRetrieveUpdateDestroyAPIView.as_view(), name='package'),
+
+    path('last_works/', LastWorksListCreateAPIView.as_view(), name='last_works'),
+    path('last_works/<int:pk>', LastWorksRetrieveUpdateDestroyAPIView.as_view(), name='last_works'),
+
+    path('services_category/', ServiceCategoryListCreateAPIView.as_view(), name='services_category'),
+    path('services_category/<int:pk>', ServiceCategoryRetrieveUpdateDestroyAPIView.as_view(), name='services_category'),
+
+    path('services_property_details/', ServicesPropertyDetailsListCreateAPIView.as_view(), name='services_property_details'),
+    path('services_property_details/<int:pk>', ServicesPropertyDetailsRetrieveUpdateDestroyAPIView.as_view(), name='services_property_details'),
+
+    path('services_property/', ServicePropertyListCreateAPIView.as_view(), name='services_property'),
+    path('services_property/<int:pk>', ServicePropertyRetrieveUpdateDestroyAPIView.as_view(), name='services_property'),
+
+    path('services/', ServicesListCreateAPIView.as_view(), name='services'),
+    path('services/<int:pk>', ServicesRetrieveUpdateDestroyAPIView.as_view(), name='services'),
 ]
