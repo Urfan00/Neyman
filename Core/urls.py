@@ -10,7 +10,8 @@ from .views import (CollaboratorsListCreateAPIView,
                     SliderListCreateAPIView,
                     SliderReadUpdateDeleteView,
                     SubscriberReadUpdateDeleteView,
-                    SubscribersEmailListCreateAPIView
+                    SubscribersEmailListCreateAPIView,
+                    index
                     )
 
 
@@ -37,5 +38,7 @@ urlpatterns = [
 
     path('our_team/', OurTeamListCreateAPIView.as_view(), name='our_team'),
     path('our_team/<int:pk>', OurTeamReadUpdateDeleteView.as_view(), name='our_team'),
+
+    path('', index, name='index')
 
 ]

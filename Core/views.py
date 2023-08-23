@@ -11,8 +11,8 @@ from .serializers import (CollaboratorsSerializers,
                           SubscribersEmailSerializer)
 
 
-# def index(request):
-#     return render(request, 'index.html')
+def index(request):
+    return render(request, 'index.html')
 
 
 # Collaborator GET & POST
