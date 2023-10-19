@@ -49,10 +49,10 @@ class FAQSerializer(serializers.ModelSerializer):
 class OurTeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = OurTeam
-        fields = ['id', 'fullname', 'position', 'image', 'created_at', 'updated_at']
+        fields = ['id', 'fullname', 'position', 'image', 'github', 'facebook', 'linkedln', 'instagram', 'tweeter', 'created_at', 'updated_at']
 
 # Contact Card
 class ContactCardSerializer(serializers.ModelSerializer):
     class Meta:
         model = ContactCard
-        fields = ['id', 'email', 'location', 'phone', 'created_at', 'updated_at']
+        fields = ['id', 'email', 'location', 'phone','icon', 'created_at', 'updated_at']

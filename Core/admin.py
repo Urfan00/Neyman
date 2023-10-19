@@ -45,7 +45,7 @@ class OurTeamAdmin(admin.ModelAdmin):
 
 
 class ContactCardAdmin(admin.ModelAdmin):
-    list_display = ['id', 'email', 'location', 'phone', 'created_at', 'updated_at']
+    list_display = ['id', 'email', 'location', 'phone','icon', 'created_at', 'updated_at']
     list_display_links = ['id', 'email']
     search_fields = ['email']
 

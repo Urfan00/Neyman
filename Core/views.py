@@ -109,7 +109,7 @@ class OurTeamReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
 
 # Contact Card GET & POST
 class ContactCardCreateAPIView(ListCreateAPIView):
-    queryset = ContactCard.objects.all()[:1]
+    queryset = ContactCard.objects.order_by('-created_at').all()[:1]
     filter_backends = [filters.SearchFilter]
     serializer_class = ContactCardSerializer
 

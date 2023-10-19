@@ -8,6 +8,7 @@ class Services(DateMixin):
     title = models.CharField(max_length=255)
     slug = models.SlugField(null=True, blank=True)
     logo = models.ImageField(upload_to=Uploader.services_logo)
+    # logo = models.CharField(max_length=255)
     photo = models.ImageField(upload_to=Uploader.services_photo)
     content = models.CharField(max_length=255)
 
