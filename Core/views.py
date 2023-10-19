@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from rest_framework import filters
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from .models import FAQ, Collaborators, Contacts, FeedBack, OurTeam, Slider, Subscribers
+from .models import FAQ, Collaborators, ContactCard, Contacts, FeedBack, OurTeam, Slider, Subscribers
 from .serializers import (CollaboratorsSerializers,
+                          ContactCardSerializer,
                           ContactSerializers,
                           FAQSerializer,
                           FeedBackSerializers,
@@ -104,3 +105,16 @@ class OurTeamListCreateAPIView(ListCreateAPIView):
 class OurTeamReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     queryset = OurTeam.objects.all()
     serializer_class = OurTeamSerializer
+
+
+# Contact Card GET & POST
+class ContactCardCreateAPIView(ListCreateAPIView):
+    queryset = ContactCard.objects.all()[:1]
+    filter_backends = [filters.SearchFilter]
+    serializer_class = ContactCardSerializer
+
+# # Contact Card GET & PUT & PATCH & DELETE
+# class OurTeamReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
+#     queryset = ContactCard.objects.first()
+#     serializer_class = OurTeamSerializer
+

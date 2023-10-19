@@ -1,12 +1,15 @@
 from django.urls import path
 from .views import (CollaboratorsListCreateAPIView,
                     CollaboratorsReadUpdateDeleteView,
+                    ContactCardCreateAPIView,
                     ContactListCreateAPIView,
                     ContactReadUpdateDeleteView,
                     FAQListCreateAPIView,
                     FAQReadUpdateDeleteView,
                     FeedBackListCreateAPIView,
-                    FeedBackReadUpdateDeleteView, OurTeamListCreateAPIView, OurTeamReadUpdateDeleteView,
+                    FeedBackReadUpdateDeleteView,
+                    OurTeamListCreateAPIView,
+                    OurTeamReadUpdateDeleteView,
                     SliderListCreateAPIView,
                     SliderReadUpdateDeleteView,
                     SubscriberReadUpdateDeleteView,
@@ -38,6 +41,8 @@ urlpatterns = [
 
     path('our_team/', OurTeamListCreateAPIView.as_view(), name='our_team'),
     path('our_team/<int:pk>', OurTeamReadUpdateDeleteView.as_view(), name='our_team'),
+
+    path('contact_card/', ContactCardCreateAPIView.as_view(), name='contact_card'),
 
     path('', index, name='index')
 

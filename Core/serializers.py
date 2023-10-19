@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import FAQ, Collaborators, Contacts, FeedBack, OurTeam, Slider, Subscribers
+from .models import FAQ, Collaborators, ContactCard, Contacts, FeedBack, OurTeam, Slider, Subscribers
 
 
 
@@ -21,7 +21,7 @@ class SubscribersEmailSerializer(serializers.ModelSerializer):
 class ContactSerializers(serializers.ModelSerializer):
     class Meta:
         model = Contacts
-        fields = ['id', 'fullname', 'email', 'phone_number', 'service', 'created_at', 'updated_at']
+        fields = ['id', 'fullname', 'email', 'phone_number', 'service', 'message', 'created_at', 'updated_at']
 
 
 # Slider Serializer
@@ -50,3 +50,9 @@ class OurTeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = OurTeam
         fields = ['id', 'fullname', 'position', 'image', 'created_at', 'updated_at']
+
+# Contact Card
+class ContactCardSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactCard
+        fields = ['id', 'email', 'location', 'phone', 'created_at', 'updated_at']

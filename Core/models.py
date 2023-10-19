@@ -1,5 +1,5 @@
 from django.db import models
-from services.mixins import DateMixin, SosialMedia
+from services.mixins import DateMixin
 from services.uploader import Uploader
 
 
@@ -81,10 +81,15 @@ class FAQ(DateMixin):
         verbose_name_plural = 'FAQ'
 
 
-class OurTeam(SosialMedia):
+class OurTeam(DateMixin):
     fullname = models.CharField(max_length=50)
     position = models.CharField(max_length=50)
     image = models.ImageField(upload_to=Uploader.our_team_image)
+    github = models.URLField(max_length=200, null=True, blank=True)
+    facebook = models.URLField(max_length=200, null=True, blank=True)
+    linkedln = models.URLField(max_length=200, null=True, blank=True)
+    instagram = models.URLField(max_length=200, null=True, blank=True)
+    tweeter = models.URLField(max_length=200, null=True, blank=True)
 
     def __str__(self):
         return self.fullname
@@ -92,3 +97,13 @@ class OurTeam(SosialMedia):
     class Meta:
         verbose_name = 'Our Team'
         verbose_name_plural = 'Our Team'
+
+class ContactCard(DateMixin):
+    email = models.EmailField(max_length=254)
+    location = models.CharField(max_length=255)
+    phone = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.email
+
+

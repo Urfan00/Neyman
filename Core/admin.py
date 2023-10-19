@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import FAQ, Collaborators, Contacts, FeedBack, OurTeam, Subscribers, Slider
+from .models import FAQ, Collaborators, ContactCard, Contacts, FeedBack, OurTeam, Subscribers, Slider
 
 
 class ContactsAdmin(admin.ModelAdmin):
@@ -44,6 +44,12 @@ class OurTeamAdmin(admin.ModelAdmin):
     search_fields = ['fullname']
 
 
+class ContactCardAdmin(admin.ModelAdmin):
+    list_display = ['id', 'email', 'location', 'phone', 'created_at', 'updated_at']
+    list_display_links = ['id', 'email']
+    search_fields = ['email']
+
+
 admin.site.register(Collaborators, CollaboratorsAdmin)
 admin.site.register(Subscribers, SubscribersAdmin)
 admin.site.register(Contacts, ContactsAdmin)
@@ -51,3 +57,4 @@ admin.site.register(Slider, SliderAdmin)
 admin.site.register(FeedBack, FeedBackAdmin)
 admin.site.register(FAQ, FAQAdmin)
 admin.site.register(OurTeam, OurTeamAdmin)
+admin.site.register(ContactCard, ContactCardAdmin)
