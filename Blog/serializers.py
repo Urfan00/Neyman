@@ -18,7 +18,7 @@ class TagSerializer(serializers.ModelSerializer):
 class BlogCREATESerializer(serializers.ModelSerializer):
     class Meta:
         model = Blog
-        fields = ['id', 'title', 'photo', 'slug', 'short_descriptions', 'long_descriptions', 'blog_category', 'tag', 'created_at', 'updated_at']
+        fields = ['id', 'title', 'photo', 'slug','date','is_active', 'short_descriptions', 'long_descriptions', 'blog_category', 'tag', 'created_at', 'updated_at']
 
 
 class BlogREADSerializer(serializers.ModelSerializer):
@@ -27,4 +27,4 @@ class BlogREADSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Blog
-        fields = ['id', 'title', 'photo', 'slug', 'short_descriptions', 'long_descriptions', 'blog_category', 'tag', 'created_at', 'updated_at']
+        fields = ['id', 'title', 'photo', 'slug','date','is_active', 'short_descriptions', 'long_descriptions', 'blog_category', 'tag', 'created_at', 'updated_at']

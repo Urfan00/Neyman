@@ -41,7 +41,7 @@ class TagRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
 class BlogListCreateAPIView(GenericAPIViewSerializerMixin, ListCreateAPIView):
     queryset = Blog.objects.all()
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend, filters.SearchFilter]
-    filterset_fields = ['blog_category', 'tag']
+    filterset_fields = ['blog_category', 'tag','is_active']
     search_fields = ['title']
     serializer_classes = {
         'GET' : BlogREADSerializer,

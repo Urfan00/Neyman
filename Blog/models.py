@@ -36,6 +36,8 @@ class Blog(DateMixin):
     long_descriptions = RichTextField()
     blog_category = models.ForeignKey(BlogCategory, on_delete=models.CASCADE, related_name='blog_category')
     tag = models.ManyToManyField(Tag, related_name='blog_tag')
+    date = models.DateField(null=True)
+    is_active = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title

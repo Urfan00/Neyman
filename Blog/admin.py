@@ -15,8 +15,9 @@ class BlogCategoryAdmin(admin.ModelAdmin):
 
 
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'photo', 'slug', 'short_descriptions', 'blog_category' ]
+    list_display = ['id', 'title', 'photo', 'slug','date','is_active','short_descriptions', 'blog_category' ]
     list_display_links = ['id', 'title']
+    list_filter = ['is_active']
     search_fields = ['title']
 
 
