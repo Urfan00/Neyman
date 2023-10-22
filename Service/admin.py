@@ -10,9 +10,9 @@ class ServicesAdmin(admin.ModelAdmin):
 
 
 class ServicePropertyAdmin(admin.ModelAdmin):
-    list_display = ['id', 'up_title', 'down_title', 'photo', 'services', 'created_at', 'updated_at']
-    list_display_links = ['id', 'up_title', 'down_title']
-    search_fields = ['up_title', 'down_title', 'services__title', 'services__slug']
+    list_display = ['id', 'title', 'photo', 'services', 'created_at', 'updated_at']
+    list_display_links = ['id','title']
+    search_fields = ['title', 'services__title', 'services__slug']
 
 
 class ServicesPropertyDetailsAdmin(admin.ModelAdmin):
