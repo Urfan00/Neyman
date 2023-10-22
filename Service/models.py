@@ -7,8 +7,7 @@ from django.template.defaultfilters import slugify
 class Services(DateMixin):
     title = models.CharField(max_length=255)
     slug = models.SlugField(null=True, blank=True)
-    logo = models.ImageField(upload_to=Uploader.services_logo)
-    # logo = models.CharField(max_length=255)
+    logo = models.CharField(max_length=255)
     photo = models.ImageField(upload_to=Uploader.services_photo)
     content = models.CharField(max_length=255)
 
@@ -25,8 +24,8 @@ class Services(DateMixin):
 
 
 class ServiceProperty(DateMixin):
-    up_title = models.CharField(max_length=255)
-    down_title = models.CharField(max_length=255)
+    # up_title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
     description = models.TextField()
     photo = models.ImageField(upload_to=Uploader.services_property_photo)
     services = models.ForeignKey(Services, on_delete=models.CASCADE, related_name='services_property')
@@ -54,7 +53,8 @@ class ServicesPropertyDetails(DateMixin):
 
 class ServiceCategory(DateMixin):
     name = models.CharField(max_length=255)
-    icon = models.ImageField(upload_to=Uploader.services_category_icon)
+    # icon = models.ImageField(upload_to=Uploader.services_category_icon)
+    icon = models.CharField(max_length=255)
     services = models.ForeignKey(Services, on_delete=models.CASCADE, related_name='services_category')
 
     def __str__(self):
