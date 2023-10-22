@@ -60,13 +60,13 @@ class ServicePropertyREADSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ServiceProperty
-        fields = ['id', 'up_title', 'down_title', 'description', 'photo', 'services', 'serv_pro_details', 'created_at', 'updated_at']
+        fields = ['id', 'title','description', 'photo', 'services', 'serv_pro_details', 'created_at', 'updated_at']
 
 
 class ServicePropertyCREATESerializer(serializers.ModelSerializer):
     class Meta:
         model = ServiceProperty
-        fields = ['id', 'up_title', 'down_title', 'description', 'photo', 'services', 'created_at', 'updated_at']
+        fields = ['id', 'title','description', 'photo', 'services', 'created_at', 'updated_at']
 
 
 class ServiceREADSerializer(serializers.ModelSerializer):
