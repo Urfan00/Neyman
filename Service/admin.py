@@ -34,7 +34,7 @@ class LastWorksAdmin(admin.ModelAdmin):
 
 
 class PackageAdmin(admin.ModelAdmin):
-    list_display = ['id', 'package_name', 'price_period', 'price', 'services_category', 'created_at', 'updated_at']
+    list_display = ['id', 'package_name', 'price_period', 'price', 'symbol', 'color', 'services_category', 'created_at', 'updated_at']
     list_display_links = ['id', 'package_name']
     search_fields = ['package_name', 'services_category__name']
 

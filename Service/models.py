@@ -1,3 +1,5 @@
+import random
+import string
 from django.db import models
 from services.mixins import DateMixin
 from services.uploader import Uploader
@@ -14,9 +16,18 @@ class Services(DateMixin):
     def __str__(self):
         return self.title
 
+    def generate_random_string(self, length=4):
+        characters = string.ascii_letters + string.digits
+        return ''.join(random.choice(characters) for _ in range(length))
+
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
-        return super().save(*args, **kwargs)
+        if not self.slug:
+            base_slug = slugify(self.title)
+            unique_slug = base_slug
+            while Services.objects.filter(slug=unique_slug).exists():
+                unique_slug = f"{base_slug}-{self.generate_random_string()}"
+            self.slug = unique_slug
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'Service'
@@ -82,6 +93,8 @@ class Package(DateMixin):
     package_name = models.CharField(max_length=255)
     price_period = models.CharField(max_length=50)
     price = models.FloatField()
+    color = models.CharField(max_length=255)
+    symbol = models.CharField(max_length=255)
     services_category = models.ForeignKey(ServiceCategory, on_delete=models.CASCADE, related_name='services_category_packages')
 
     def __str__(self):
