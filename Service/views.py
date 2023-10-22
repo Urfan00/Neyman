@@ -113,7 +113,7 @@ class ServicePropertyListCreateAPIView(GenericAPIViewSerializerMixin, ListCreate
     queryset = ServiceProperty.objects.all()
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend, filters.SearchFilter]
     filterset_fields = ['services']
-    search_fields = ['up_title', 'down_title']
+    search_fields = ['title']
     serializer_classes = {
         'GET' : ServicePropertyREADSerializer,
         'POST' : ServicePropertyCREATESerializer
