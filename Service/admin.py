@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import LastWorks, Package, PackageProperty, ServiceCategory, ServiceProperty, Services, ServicesPropertyDetails
+from .models import LastWorks, Package, PackageProperty, ServiceProperty, Services, ServicesPropertyDetails
 
 
 
@@ -21,27 +21,22 @@ class ServicesPropertyDetailsAdmin(admin.ModelAdmin):
     search_fields = ['title', 'services_property__up_title', 'services_property__down_title']
 
 
-class ServiceCategoryAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'icon', 'services', 'created_at', 'updated_at']
-    list_display_links = ['id', 'name']
-    search_fields = ['name', 'services__title']
-
-
 class LastWorksAdmin(admin.ModelAdmin):
-    list_display = ['id', 'company_name', 'photo', 'services_category', 'created_at', 'updated_at']
+    list_display = ['id', 'company_name', 'photo', 'link_url', 'services_property', 'created_at', 'updated_at']
     list_display_links = ['id', 'company_name']
-    search_fields = ['company_name', 'services_category__name']
+    search_fields = ['company_name', 'services_property__title']
 
 
 class PackageAdmin(admin.ModelAdmin):
-    list_display = ['id', 'package_name', 'price_period', 'price', 'symbol', 'color', 'services_category', 'created_at', 'updated_at']
+    list_display = ['id', 'package_name', 'price_period', 'price', 'symbol', 'color', 'services_property', 'created_at', 'updated_at']
     list_display_links = ['id', 'package_name']
-    search_fields = ['package_name', 'services_category__name']
+    search_fields = ['package_name', 'services_property__title']
 
 
 class PackagePropertyAdmin(admin.ModelAdmin):
-    list_display = ['id', 'property_name', 'icon', 'package', 'created_at', 'updated_at']
+    list_display = ['id', 'property_name', 'is_active', 'package', 'created_at', 'updated_at']
     list_display_links = ['id', 'property_name']
+    list_filter = ['is_active']
     search_fields = ['property_name', 'package__package_name']
 
 
@@ -49,7 +44,6 @@ class PackagePropertyAdmin(admin.ModelAdmin):
 admin.site.register(Services, ServicesAdmin)
 admin.site.register(ServiceProperty, ServicePropertyAdmin)
 admin.site.register(ServicesPropertyDetails, ServicesPropertyDetailsAdmin)
-admin.site.register(ServiceCategory, ServiceCategoryAdmin)
 admin.site.register(LastWorks, LastWorksAdmin)
 admin.site.register(Package, PackageAdmin)
 admin.site.register(PackageProperty, PackagePropertyAdmin)

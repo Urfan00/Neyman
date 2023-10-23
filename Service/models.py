@@ -38,6 +38,7 @@ class ServiceProperty(DateMixin):
     # up_title = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     description = models.TextField()
+    icon = models.CharField(max_length=255)
     photo = models.ImageField(upload_to=Uploader.services_property_photo)
     services = models.ForeignKey(Services, on_delete=models.CASCADE, related_name='services_property')
 
@@ -62,27 +63,14 @@ class ServicesPropertyDetails(DateMixin):
         verbose_name_plural = 'Services Property Details'
 
 
-class ServiceCategory(DateMixin):
-    name = models.CharField(max_length=255)
-    # icon = models.ImageField(upload_to=Uploader.services_category_icon)
-    icon = models.CharField(max_length=255)
-    services = models.ForeignKey(Services, on_delete=models.CASCADE, related_name='services_category')
-
-    def __str__(self):
-        return f"{self.services.title}'s {self.name} category"
-
-    class Meta:
-        verbose_name = 'Services Category'
-        verbose_name_plural = 'Services Category'
-
-
 class LastWorks(DateMixin):
     company_name = models.CharField(max_length=255)
     photo = models.ImageField(upload_to=Uploader.services_category_last_works)
-    services_category = models.ForeignKey(ServiceCategory, on_delete=models.CASCADE, related_name='services_category_last_works')
+    link_url = models.URLField(max_length=200, null=True, blank=True)
+    services_property = models.ForeignKey(ServiceProperty, on_delete=models.CASCADE, related_name='services_property_last_works')
 
     def __str__(self):
-        return f"{self.services_category.services.title}'s {self.services_category.name} category {self.company_name}'s last work"
+        return f"{self.services_property.services.title}'s {self.services_property.title} property {self.company_name}'s last work"
 
     class Meta:
         verbose_name = 'Last Work'
@@ -95,10 +83,10 @@ class Package(DateMixin):
     price = models.FloatField()
     color = models.CharField(max_length=255)
     symbol = models.CharField(max_length=255)
-    services_category = models.ForeignKey(ServiceCategory, on_delete=models.CASCADE, related_name='services_category_packages')
+    services_property = models.ForeignKey(ServiceProperty, on_delete=models.CASCADE, related_name='services_property_packages')
 
     def __str__(self):
-        return f"{self.services_category.services.title}'s {self.services_category.name} category {self.package_name}'s package name"
+        return f"{self.services_property.services.title}'s {self.services_property.title} category {self.package_name}'s package name"
 
 
     class Meta:
@@ -108,7 +96,8 @@ class Package(DateMixin):
 
 class PackageProperty(DateMixin):
     property_name = models.CharField(max_length=255)
-    icon = models.ImageField(upload_to=Uploader.services_package_icon)
+    is_active = models.BooleanField(default=False)
+    # icon = models.ImageField(upload_to=Uploader.services_package_icon)
     package = models.ForeignKey(Package, on_delete=models.CASCADE, related_name='package_property')
 
     def __str__(self):

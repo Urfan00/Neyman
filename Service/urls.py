@@ -5,8 +5,6 @@ from .views import (ServicesListCreateAPIView,
                     ServicePropertyRetrieveUpdateDestroyAPIView,
                     ServicesPropertyDetailsListCreateAPIView,
                     ServicesPropertyDetailsRetrieveUpdateDestroyAPIView,
-                    ServiceCategoryListCreateAPIView,
-                    ServiceCategoryRetrieveUpdateDestroyAPIView,
                     LastWorksListCreateAPIView,
                     LastWorksRetrieveUpdateDestroyAPIView,
                     PackageListCreateAPIView,
@@ -24,9 +22,6 @@ urlpatterns = [
 
     path('services_property_details/', ServicesPropertyDetailsListCreateAPIView.as_view(), name='services_property_details'),
     path('services_property_details/<int:pk>', ServicesPropertyDetailsRetrieveUpdateDestroyAPIView.as_view(), name='services_property_details'),
-
-    path('services_category/', ServiceCategoryListCreateAPIView.as_view(), name='services_category'),
-    path('services_category/<int:pk>', ServiceCategoryRetrieveUpdateDestroyAPIView.as_view(), name='services_category'),
 
     path('last_works/', LastWorksListCreateAPIView.as_view(), name='last_works'),
     path('last_works/<int:pk>', LastWorksRetrieveUpdateDestroyAPIView.as_view(), name='last_works'),

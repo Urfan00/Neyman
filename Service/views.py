@@ -4,23 +4,17 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from .models import (LastWorks,
                      Package,
                      PackageProperty,
-                     ServiceCategory,
-                     ServiceProperty,
-                     Services,
+                     ServiceProperty, Services,
                      ServicesPropertyDetails)
-from .serializers import (ServiceSerializer,
+from .serializers import (LastWorksSerializer,
+                          PackageCREATESerializer,
+                          PackagePropertySeriazlier,
+                          PackageREADSerializer,
+                          ServiceCREATESerializer,
                           ServicePropertyCREATESerializer,
                           ServicePropertyREADSerializer,
-                          ServicesPropertyDetailsREADSeriazlier,
-                          ServicesPropertyDetailsCREATESeriazlier,
-                          ServiceCategoryREADSerializer,
-                          ServiceCategoryCREATESerializer,
-                          LastWorksREADSerializer,
-                          LastWorksCREATESerializer,
-                          PackageREADSerializer,
-                          PackageCREATESerializer,
-                          PackagePropertyREADSeriazlier,
-                          PackagePropertyCREATESeriazlier)
+                          ServiceREADSerializer,
+                          ServicesPropertyDetailsSeriazlier)
 
 
 
@@ -29,19 +23,69 @@ class GenericAPIViewSerializerMixin:
         return self.serializer_classes[self.request.method]
 
 
-# Service GET & POST
-class ServicesListCreateAPIView(ListCreateAPIView):
-    queryset = Services.objects.all()
+# Package Property GET & POST
+class PackagePropertyListCreateAPIView(ListCreateAPIView):
+    queryset = PackageProperty.objects.all()
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['property_name']
+    serializer_class = PackagePropertySeriazlier
+
+
+# Package Property GET & PUT & PAtch & DELETE
+class PackagePropertyRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = PackageProperty.objects.all()
+    serializer_class = PackagePropertySeriazlier
+
+
+# Package GET & POST
+class PackageListCreateAPIView(GenericAPIViewSerializerMixin, ListCreateAPIView):
+    queryset = Package.objects.all()
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend, filters.SearchFilter]
-    search_fields = ['title', 'slug']
-    serializer_class = ServiceSerializer
+    filterset_fields = ['price_period', 'price']
+    search_fields = ['package_name', 'price']
+    serializer_classes = {
+        'GET' : PackageREADSerializer,
+        'POST' : PackageCREATESerializer
+    }
 
 
-# Service GET & PUT & PAtch & DELETE
-class ServicesRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
-    queryset = Services.objects.all()
-    serializer_class = ServiceSerializer
-    lookup_field = 'slug'
+# Package GET & PUT & PAtch & DELETE
+class PackageRetrieveUpdateDestroyAPIView(GenericAPIViewSerializerMixin, RetrieveUpdateDestroyAPIView):
+    queryset = Package.objects.all()
+    serializer_classes = {
+        'GET' : PackageREADSerializer,
+        'PUT' : PackageCREATESerializer,
+        'PATCH' : PackageCREATESerializer
+    }
+
+
+# Last Works GET & POST
+class LastWorksListCreateAPIView(ListCreateAPIView):
+    queryset = LastWorks.objects.all()
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend, filters.SearchFilter]
+    filterset_fields = ['services_property']
+    search_fields = ['company_name']
+    serializer_class = LastWorksSerializer
+
+
+# Last Works GET & PUT & PAtch & DELETE
+class LastWorksRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = LastWorks.objects.all()
+    serializer_class = LastWorksSerializer
+
+
+# Services Property Details GET & POST
+class ServicesPropertyDetailsListCreateAPIView(ListCreateAPIView):
+    queryset = ServicesPropertyDetails.objects.all()
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title']
+    serializer_class = ServicesPropertyDetailsSeriazlier
+
+
+# Services Property Details GET & PUT & PAtch & DELETE
+class ServicesPropertyDetailsRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = ServicesPropertyDetails.objects.all()
+    serializer_class = ServicesPropertyDetailsSeriazlier
 
 
 # Service Property GET & POST
@@ -66,111 +110,23 @@ class ServicePropertyRetrieveUpdateDestroyAPIView(GenericAPIViewSerializerMixin,
     }
 
 
-# Services Property Details GET & POST
-class ServicesPropertyDetailsListCreateAPIView(GenericAPIViewSerializerMixin, ListCreateAPIView):
-    queryset = ServicesPropertyDetails.objects.all()
+# Service GET & POST
+class ServicesListCreateAPIView(GenericAPIViewSerializerMixin, ListCreateAPIView):
+    queryset = Services.objects.all()
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend, filters.SearchFilter]
-    filterset_fields = ['services_property']
-    search_fields = ['title']
+    search_fields = ['title', 'slug']
     serializer_classes = {
-        'GET' : ServicesPropertyDetailsREADSeriazlier,
-        'POST' : ServicesPropertyDetailsCREATESeriazlier
+        'GET' : ServiceREADSerializer,
+        'POST' : ServiceCREATESerializer
     }
 
 
-# Services Property Details GET & PUT & PAtch & DELETE
-class ServicesPropertyDetailsRetrieveUpdateDestroyAPIView(GenericAPIViewSerializerMixin, RetrieveUpdateDestroyAPIView):
-    queryset = ServicesPropertyDetails.objects.all()
+# Service GET & PUT & PAtch & DELETE
+class ServicesRetrieveUpdateDestroyAPIView(GenericAPIViewSerializerMixin, RetrieveUpdateDestroyAPIView):
+    queryset = Services.objects.all()
+    lookup_field = "slug"
     serializer_classes = {
-        'GET' : ServicesPropertyDetailsREADSeriazlier,
-        'PUT' : ServicesPropertyDetailsCREATESeriazlier,
-        'PATCH' : ServicesPropertyDetailsCREATESeriazlier
-    }
-
-
-# Service Category GET & POST
-class ServiceCategoryListCreateAPIView(GenericAPIViewSerializerMixin, ListCreateAPIView):
-    queryset = ServiceCategory.objects.all()
-    filter_backends = [django_filters.rest_framework.DjangoFilterBackend, filters.SearchFilter]
-    filterset_fields = ['services']
-    search_fields = ['name']
-    serializer_classes = {
-        'GET' : ServiceCategoryREADSerializer,
-        'POST' : ServiceCategoryCREATESerializer
-    }
-
-
-# Service Category GET & PUT & PAtch & DELETE
-class ServiceCategoryRetrieveUpdateDestroyAPIView(GenericAPIViewSerializerMixin, RetrieveUpdateDestroyAPIView):
-    queryset = ServiceCategory.objects.all()
-    serializer_classes = {
-        'GET' : ServiceCategoryREADSerializer,
-        'PUT' : ServiceCategoryCREATESerializer,
-        'PATCH' : ServiceCategoryCREATESerializer
-    }
-
-
-# Last Works GET & POST
-class LastWorksListCreateAPIView(GenericAPIViewSerializerMixin, ListCreateAPIView):
-    queryset = LastWorks.objects.all()
-    filter_backends = [django_filters.rest_framework.DjangoFilterBackend, filters.SearchFilter]
-    filterset_fields = ['services_category']
-    search_fields = ['company_name']
-    serializer_classes = {
-        'GET' : LastWorksREADSerializer,
-        'POST' : LastWorksCREATESerializer
-    }
-
-
-# Last Works GET & PUT & PAtch & DELETE
-class LastWorksRetrieveUpdateDestroyAPIView(GenericAPIViewSerializerMixin, RetrieveUpdateDestroyAPIView):
-    queryset = LastWorks.objects.all()
-    serializer_classes = {
-        'GET' : LastWorksREADSerializer,
-        'PUT' : LastWorksCREATESerializer,
-        'PATCH' : LastWorksCREATESerializer
-    }
-
-
-# Package GET & POST
-class PackageListCreateAPIView(GenericAPIViewSerializerMixin, ListCreateAPIView):
-    queryset = Package.objects.all()
-    filter_backends = [django_filters.rest_framework.DjangoFilterBackend, filters.SearchFilter]
-    filterset_fields = ['services_category', 'price_period']
-    search_fields = ['package_name', 'price']
-    serializer_classes = {
-        'GET' : PackageREADSerializer,
-        'POST' : PackageCREATESerializer
-    }
-
-
-# Package GET & PUT & PAtch & DELETE
-class PackageRetrieveUpdateDestroyAPIView(GenericAPIViewSerializerMixin, RetrieveUpdateDestroyAPIView):
-    queryset = Package.objects.all()
-    serializer_classes = {
-        'GET' : PackageREADSerializer,
-        'PUT' : PackageCREATESerializer,
-        'PATCH' : PackageCREATESerializer
-    }
-
-
-# Package Property GET & POST
-class PackagePropertyListCreateAPIView(GenericAPIViewSerializerMixin, ListCreateAPIView):
-    queryset = PackageProperty.objects.all()
-    filter_backends = [django_filters.rest_framework.DjangoFilterBackend, filters.SearchFilter]
-    filterset_fields = ['package']
-    search_fields = ['property_name']
-    serializer_classes = {
-        'GET' : PackagePropertyREADSeriazlier,
-        'POST' : PackagePropertyCREATESeriazlier
-    }
-
-
-# Package Property GET & PUT & PAtch & DELETE
-class PackagePropertyRetrieveUpdateDestroyAPIView(GenericAPIViewSerializerMixin, RetrieveUpdateDestroyAPIView):
-    queryset = PackageProperty.objects.all()
-    serializer_classes = {
-        'GET' : PackagePropertyREADSeriazlier,
-        'PUT' : PackagePropertyCREATESeriazlier,
-        'PATCH' : PackagePropertyCREATESeriazlier
+        'GET' : ServiceREADSerializer,
+        'PUT' : ServiceCREATESerializer,
+        'PATCH' : ServiceCREATESerializer
     }
