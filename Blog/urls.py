@@ -16,6 +16,6 @@ urlpatterns = [
     path('tag/<int:pk>', TagRetrieveUpdateDestroyAPIView.as_view(), name='tag'),
 
     path('blog/', BlogListCreateAPIView.as_view(), name='blog'),
-    path('blog/<int:pk>', BlogRetrieveUpdateDestroyAPIView.as_view(), name='blog'),
+    path('blog/<slug:slug>', BlogRetrieveUpdateDestroyAPIView.as_view(), name='blog'),
 
 ]

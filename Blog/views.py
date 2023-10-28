@@ -51,6 +51,7 @@ class BlogListCreateAPIView(GenericAPIViewSerializerMixin, ListCreateAPIView):
 # Blog GET & PUT & PATCH & DELETE
 class BlogRetrieveUpdateDestroyAPIView(GenericAPIViewSerializerMixin, RetrieveUpdateDestroyAPIView):
     queryset = Blog.objects.all()
+    lookup_field = "slug"
     serializer_classes = {
         'GET' : BlogREADSerializer,
         'PUT' : BlogCREATESerializer,
