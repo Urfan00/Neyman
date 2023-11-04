@@ -43,7 +43,7 @@ class ServiceProperty(DateMixin):
     services = models.ForeignKey(Services, on_delete=models.CASCADE, related_name='services_property')
 
     def __str__(self):
-        return f"{self.services.title}'s property"
+        return f"{self.title}"
 
     class Meta:
         verbose_name = 'Service Property'

@@ -27,7 +27,22 @@ class PackageCREATESerializer(serializers.ModelSerializer):
         fields = ['id', 'package_name', 'price_period', 'price', 'color', 'symbol', 'services_property', 'created_at', 'updated_at']
 
 
+class ServiceCREATESerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Services
+        fields = ['id', 'title', 'slug', 'logo', 'photo', 'content', 'created_at', 'updated_at']
+
+
+class ServicePropertyCREATESerializer(serializers.ModelSerializer):
+    services=ServiceCREATESerializer()
+    class Meta:
+        model = ServiceProperty
+        fields = ['id', 'title','description', 'photo', 'services', 'icon', 'created_at', 'updated_at']
+
+
 class LastWorksSerializer(serializers.ModelSerializer):
+    services_property = ServicePropertyCREATESerializer()
+
     class Meta:
         model = LastWorks
         fields = ['id', 'company_name', 'photo', 'link_url', 'services_property', 'created_at', 'updated_at']
@@ -49,12 +64,6 @@ class ServicePropertyREADSerializer(serializers.ModelSerializer):
         fields = ['id', 'title','description', 'photo', 'services', 'icon', 'service_property_detail', 'package', 'created_at', 'updated_at']
 
 
-class ServicePropertyCREATESerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ServiceProperty
-        fields = ['id', 'title','description', 'photo', 'services', 'icon', 'created_at', 'updated_at']
-
-
 class ServiceREADSerializer(serializers.ModelSerializer):
     service_details = ServicePropertyREADSerializer(many=True, read_only=True, source='services_property')
 
@@ -63,7 +72,4 @@ class ServiceREADSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'slug', 'logo', 'photo', 'content', 'service_details', 'created_at', 'updated_at']
 
 
-class ServiceCREATESerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Services
-        fields = ['id', 'title', 'slug', 'logo', 'photo', 'content', 'created_at', 'updated_at']
+

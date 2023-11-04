@@ -63,7 +63,7 @@ class PackageRetrieveUpdateDestroyAPIView(GenericAPIViewSerializerMixin, Retriev
 class LastWorksListCreateAPIView(ListCreateAPIView):
     queryset = LastWorks.objects.all()
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend, filters.SearchFilter]
-    filterset_fields = ['services_property']
+    filterset_fields = ['services_property','services_property__services']
     search_fields = ['company_name']
     serializer_class = LastWorksSerializer
 
