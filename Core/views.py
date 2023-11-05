@@ -23,6 +23,7 @@ class CollaboratorsListCreateAPIView(ListCreateAPIView):
     search_fields =  ['name']
     serializer_class = CollaboratorsSerializers
 
+
 # Collaborator GET & PUT & PATCH & DELETE
 class CollaboratorsReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     queryset = Collaborators.objects.all()
@@ -35,6 +36,7 @@ class SubscribersEmailListCreateAPIView(ListCreateAPIView):
     filter_backends = [filters.SearchFilter]
     search_fields = ['email']
     serializer_class = SubscribersEmailSerializer
+
 
 # Subscriber GET & PUT & DELETE
 class SubscriberReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
@@ -49,6 +51,7 @@ class ContactListCreateAPIView(ListCreateAPIView):
     search_fields = ['fullname', 'email', 'phone_number']
     serializer_class = ContactSerializers
 
+
 # Contact GET & PUT & PATCH & DELETE
 class ContactReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     queryset = Contacts.objects.all()
@@ -61,6 +64,7 @@ class SliderListCreateAPIView(ListCreateAPIView):
     filter_backends = [filters.SearchFilter]
     search_fields = ['slider_header']
     serializer_class = SliderSerializers
+
 
 # Slider GET & PUT & PATCH & DELETE
 class SliderReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
@@ -75,6 +79,7 @@ class FeedBackListCreateAPIView(ListCreateAPIView):
     search_fields = ['fullname']
     serializer_class = FeedBackSerializers
 
+
 # FeedBack GET & PUT & PATCH & DELETE
 class FeedBackReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     queryset = FeedBack.objects.all()
@@ -87,6 +92,7 @@ class FAQListCreateAPIView(ListCreateAPIView):
     filter_backends = [filters.SearchFilter]
     search_fields = ['question']
     serializer_class = FAQSerializer
+
 
 # FAQ GET & PUT & PATCH & DELETE
 class FAQReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
@@ -101,6 +107,7 @@ class OurTeamListCreateAPIView(ListCreateAPIView):
     search_fields = ['fullname']
     serializer_class = OurTeamSerializer
 
+
 # Our Team GET & PUT & PATCH & DELETE
 class OurTeamReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     queryset = OurTeam.objects.all()
@@ -112,9 +119,3 @@ class ContactCardCreateAPIView(ListCreateAPIView):
     queryset = ContactCard.objects.order_by('-created_at').all()[:1]
     filter_backends = [filters.SearchFilter]
     serializer_class = ContactCardSerializer
-
-# # Contact Card GET & PUT & PATCH & DELETE
-# class OurTeamReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
-#     queryset = ContactCard.objects.first()
-#     serializer_class = OurTeamSerializer
-

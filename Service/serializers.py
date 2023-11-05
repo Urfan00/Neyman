@@ -34,14 +34,15 @@ class ServiceCREATESerializer(serializers.ModelSerializer):
 
 
 class ServicePropertyCREATESerializer(serializers.ModelSerializer):
-    services=ServiceCREATESerializer()
+    # services=ServiceCREATESerializer()
+
     class Meta:
         model = ServiceProperty
         fields = ['id', 'title','description', 'photo', 'services', 'icon', 'created_at', 'updated_at']
 
 
 class LastWorksSerializer(serializers.ModelSerializer):
-    services_property = ServicePropertyCREATESerializer()
+    # services_property = ServicePropertyCREATESerializer()
 
     class Meta:
         model = LastWorks
@@ -57,7 +58,6 @@ class ServicesPropertyDetailsSeriazlier(serializers.ModelSerializer):
 class ServicePropertyREADSerializer(serializers.ModelSerializer):
     service_property_detail = ServicesPropertyDetailsSeriazlier(many=True, read_only=True, source='services_property_details')
     package = PackageREADSerializer(many=True, read_only=True, source='services_property_packages')
-    # last_work = LastWorksSerializer(many=True, read_only=True, source='services_property_last_works')
 
     class Meta:
         model = ServiceProperty
@@ -70,6 +70,3 @@ class ServiceREADSerializer(serializers.ModelSerializer):
     class Meta:
         model = Services
         fields = ['id', 'title', 'slug', 'logo', 'photo', 'content', 'service_details', 'created_at', 'updated_at']
-
-
-
